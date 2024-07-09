@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: 'Favorit', sans-serif;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Toujours à droite */
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+    /* transition: color 0.1s, background-color 0.1s; */
+}
+
+header .logo {
+    display: none;
+}
+
+header.active .logo {
+    display: block;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end; /* Toujours à droite */
+    align-items: center; /* Centre verticalement */
+    margin-right: 20px; /* Marge à droite */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    justify-content: flex-end; /* Toujours à droite */
+    align-items: center; /* Centre verticalement */
+    margin-right: 20px; /* Marge à droite */
+    transition: color 0.1s;
+    color: black;
+}
+
+header.white nav ul li a {
+    color: black;
+}
+
+header.photo nav ul li a {
+    color: white;
+}
+
+header.black nav ul li a {
+    color: white;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+#home {
+    background-color: #EE002D;
+}
+
+.centered-logo {
+    height: 20vh;
+}
+
+.photo-bg {
+    background-image: url('./images/Zaha.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.white-bg {
+    background-color: white;
+    color: black;
+}
+
+.black-bg {
+    background-color: black;
+    color: white;
+}
+
+.red-text {
+    color: #EE002D;
+}
+
+.content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.box {
+    border: 0.1vh solid white;
+    display: block;
+    margin: 20px;
+    padding: 20px;
+}
