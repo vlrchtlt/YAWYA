@@ -1,7 +1,3 @@
-body {
-    margin: 0;
-    font-family: 'Favorit', sans-serif;
-}
 
 header {
     position: fixed;
@@ -106,3 +102,37 @@ section {
     margin: 20px;
     padding: 20px;
 }
+
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #EE002D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Favorit', sans-serif;
+  }
+  .logo {
+    max-width: 80%;
+    height: auto;
+  }
+  .container {
+    text-align: center;
+  }
+  h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  @media (min-width: 768px) {
+    .logo {
+      max-width: 50%;
+    }
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+
