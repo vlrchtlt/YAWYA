@@ -3,13 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>YAWYA - Inclusive Luxury Fashion Platform</title>
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
-    <div class="container">
-        <img src="images/Logo.svg" alt="Logo" class="logo">
+    <nav class="navbartop" id="navbarTop">
+        <div class="navbar-right">
+            <a href="#hero">ABOUT</a>
+            <a href="#label">LABEL</a>
+            <a href="#concept">CONCEPT</a>
+        </div>
+    </nav>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="images/logo_red.svg" alt="YAWYA Logo"> 
+        </div>
+        <div class="navbar-right">
+            <p class="page-title"></p>
+        </div>
+    </nav>
+
+    <section class="logo">
+        <img src="images/logo.svg" alt="YAWYA Logo">
+        <p>You Are Who You Are</p>
+    </section>
+
+    <section id="hero" class="section hero" data-title="">
+        <h1>Creative Fashion for Every Morphology</h1>
+        <h2>Empowering Creative Labels with Custom Clothing</h2>
+        <button class="cta" onclick="openForm('demo')">Ask for a demo</button>
+    </section>
+
+    <section id="label" class="section">
+        <h1 class="section-title">LABEL</h1>
+        <div class="section-content creators">
+            <img src="images/steven-passaro.png" alt="Steven Passaro">
+            <img src="images/thando-hopa.png" alt="Thando Hopa">
+        </div>
+        <div class="section-content">
+            <button class="cta" onclick="openForm('collaborations')">Learn More About Our Collaborations</button>
+        </div>
+    </section>
+
+    <section id="concept" class="section concept">
+        <h1 class="section-title">CONCEPT</h1>
+        <div class="section-content">
+            <p>Precise Remote Body Scan</p>
+            <p>Creative Freedom & Stylistic Integrity</p>
+            <p>Inclusive Collections</p>
+            <p>Exclusive & Groundbreaking Customer Experience</p>
+            <button class="cta" onclick="openForm('info')">Learn More About <img src="images/logo_red.svg" alt="YAWYA" style="vertical-align: text-middle; height: 20px; margin-right: 0px;"></button>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <p>Subscribe to our newsletter for the latest updates.</p>
+            <form id="newsletter-form">
+                <input type="text" name="name" placeholder="Your Name" autocomplete="given-name" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="on" required>
+                <button type="submit" class="cta">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="overlay" onclick="closeForm()"></div>
+    <div id="form-popup">
+        <form id="popup-form">
+            <span class="close-button" onclick="closeForm()">×</span>
+            <h3 id="form-title"></h3>
+            <input type="text" id="form-name" name="name" placeholder="Your Name" autocomplete="given-name" required>
+            <input type="email" id="form-email" name="email" placeholder="Your Email" autocomplete="on" required>
+            <input type="hidden" id="form-type" name="formType" value="">
+            <button type="submit">Submit</button>
+        </form>
     </div>
+
+    <div id="popup-container">
+        <div id="loading-popup">
+            <div class="popup-content">
+                <p>Submitting...</p>
+            </div>
+        </div>
+        <div id="response-popup">
+            <div class="popup-content">
+                <span class="close-button" onclick="closePopup()">×</span>
+                <p id="response-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/vchatele/">LinkedIn</a>
+                <a href="https://www.instagram.com/yawya_studio">Instagram</a>
+            </div>
+            <p>© 2024 YAWYA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function openForm(formType) {
+            document.getElementById("form-title").innerText = getFormTitle(formType);
+            document.getElementById("form-type").value = formType;
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("form-popup").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("form-popup").style.display = "none";
+        }
+
+        function getFormTitle(formType) {
+            switch (formType) {
+                case "demo":
+                    return "Request a Demo";
+                case "collaborations":
+                    return "Learn More About Collaborations";
+                case "info":
+                    return "Request More Information";
+                default:
+                    return "Contact Us";
+            }
+        }
+
+        document.getElementById("popup-form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            const name = document.getElementById("form-name").value;
+            const email = document.getElementById("form-email").value;
+            const formType = document.getElementById("form-type").value;
+
+            showLoadingPopup();
+
+            sendDataToGoogleSheet(name, email, formType)
+              .then(response => {
+                showResponsePopup(response.message); 
+              })
+              .catch(error => {
+                console.error("Error submitting form:", error);
+                showResponsePopup("An error occurred while submitting the form. Please try again later.");
+              });
+        });
+
+        async function sendDataToGoogleSheet(name, email, formType) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwSCI-fK0hHspL7wNmoisSqLvJcyK7HO79Fb4tjlkQ6qjUd3RVQ6SKUQRIvyb4TFrHH/exec';
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('formType', formType);
+
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error submitting form: ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        function showLoadingPopup() {
+            document.getElementById("popup-container").style.display = "block";
+            document.getElementById("loading-popup").style.display = "block";
+        }
+
+        function showResponsePopup(message) {
+            document.getElementById("loading-popup").style.display = "none";
+            document.getElementById("response-popup").style.display = "block";
+            document.getElementById("response-message").innerText = message;
+            setTimeout(closePopup, 1500); 
+        }
+
+        function closePopup() {
+            document.getElementById("popup-container").style.display = "none";
+            document.getElementById("response-popup").style.display = "none";
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.querySelector('.navbar');
+
+            setTimeout(() => {
+                navbar.classList.add('visible'); 
+            }, 1000);
+
+            const observer = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                navbar.classList.add('visible'); 
+                } else {
+                navbar.classList.remove('visible');
+                }
+            });
+
+            observer.observe(document.querySelector('.logo')); 
+        });
+
+        document.getElementById("newsletter-form").addEventListener("submit", function(event) {
+            event.preventDefault();  
+
+            const name = document.querySelector("#newsletter-form input[name='name']").value;
+            const email = document.querySelector("#newsletter-form input[name='email']").value;
+
+            sendDataToGoogleSheet(name, email, "newsletter")
+                .then(() => {
+                    console.log("Newsletter subscription successful!");
+                })
+                .catch(error => {
+                    console.error("Error submitting form:", error);
+                });
+        });
+    </script>
 </body>
 </html>
-
