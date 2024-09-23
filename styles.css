@@ -250,6 +250,7 @@ button.cta:hover {
     font-size: 1em;
     cursor: pointer;
     margin: 5px;
+    border-radius: 0px; 
 }
 
 /* Pop-up Form Styling */
@@ -266,7 +267,7 @@ button.cta:hover {
     max-width: 90vw; 
     max-height: 90vh; 
     box-sizing: border-box;
-    border-radius: none; 
+    border-radius: 0px; 
 }
 
 /* Overlay styles */
