@@ -7,12 +7,71 @@
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
+    <nav class="navbar">
+        <img src="images/logo_red.svg" alt="YAWYA Logo"> 
+        <div class="navbar-right">
+            <a href="#hero">ABOUT</a>
+            <a href="#label">LABEL</a>
+            <a href="#concept">CONCEPT</a>
+        </div>
+    </nav>
+
     <section class="logo">
-        <img src="images/Logo.svg" alt="YAWYA Logo">
+        <img src="images/logo.svg" alt="YAWYA Logo">
         <p>You Are Who You Are</p>
     </section>
 
-   
+    <section id="hero" class="section hero" data-title="">
+        <h1>Creative Fashion for Every Morphology</h1>
+        <h2>Empowering Creative Labels with Custom Clothing</h2>
+        <button class="cta" onclick="openForm('demo')">Ask for a demo</button>
+    </section>
+
+    <section id="label" class="section">
+        <h1 class="section-title">LABEL</h1>
+        <div class="section-content creators">
+            <img src="images/steven-passaro.png" alt="Steven Passaro">
+            <img src="images/thando-hopa.png" alt="Thando Hopa" class="thando-photo">
+        </div>
+        <div class="section-content">
+            <button class="cta" onclick="openForm('collaborations')">Learn More About Our Collaborations</button>
+        </div>
+    </section>
+
+    <section id="concept" class="section concept">
+        <h1 class="section-title">CONCEPT</h1>
+        <div class="section-content">
+            <p>Precise Remote Body Scan</p>
+            <p class="mobile-hide">Creative Freedom & Stylistic Integrity</p>
+            <p>Inclusive Collections</p>
+            <p class="mobile-hide">Exclusive & Groundbreaking Customer Experience</p>
+            <button class="cta" onclick="openForm('info')">Learn More About <img src="images/logo_red.svg" alt="YAWYA" style="vertical-align: text-middle; height: 20px; margin-right: 0px;"></button>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <p>Subscribe to our newsletter for the latest updates.</p>
+            <form id="newsletter-form">
+                <input type="text" name="name" placeholder="Your Name" autocomplete="given-name" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="on" required>
+                <button type="submit" class="cta">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="overlay" onclick="closeForm()"></div>
+    <div id="form-popup">
+        <form id="popup-form">
+            <span class="close-button" onclick="closeForm()">×</span>
+            <h3 id="form-title"></h3>
+            <input type="text" id="form-name" name="name" placeholder="Your Name" autocomplete="given-name" required>
+            <input type="email" id="form-email" name="email" placeholder="Your Email" autocomplete="on" required>
+            <input type="hidden" id="form-type" name="formType" value="">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
     <div id="popup-container">
         <div id="loading-popup">
             <div class="popup-content">
@@ -26,6 +85,16 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/vchatele/">LinkedIn</a>
+                <a href="https://www.instagram.com/yawya_studio">Instagram</a>
+            </div>
+            <p>© 2024 YAWYA. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         function openForm(formType) {
@@ -48,6 +117,8 @@
                     return "Learn More About Collaborations";
                 case "info":
                     return "Request More Information";
+                case "newsletter":
+                    return "Newsletter"
                 default:
                     return "Contact Us";
             }
@@ -59,10 +130,11 @@
             const name = document.getElementById("form-name").value;
             const email = document.getElementById("form-email").value;
             const formType = document.getElementById("form-type").value;
+            const newsletter = document.getElementById("newsletter-form").value;
 
             showLoadingPopup();
 
-            sendDataToGoogleSheet(name, email, formType)
+            sendDataToGoogleSheet(name, email, formType, newsletter)
               .then(response => {
                 showResponsePopup(response.message); 
               })
@@ -83,6 +155,8 @@
                 method: 'POST',
                 body: formData
             });
+
+            showResponsePopup("Newsletter subscription successful!"); 
 
             if (!response.ok) {
                 throw new Error(`Error submitting form: ${response.status}`);
@@ -108,23 +182,33 @@
             document.getElementById("response-popup").style.display = "none";
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const navbar = document.querySelector('.navbar');
+    window.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.querySelector('.navbar-right');
+        const logoSection = document.querySelector('.logo');
+        let lastScrollTop = 0;
 
-            setTimeout(() => {
-                navbar.classList.add('visible'); 
-            }, 1000);
+        // Masquer la navbar au chargement 
+        navbar.style.transform = 'translateY(-100%)';
 
-            const observer = new IntersectionObserver(entries => {
-                if (entries[0].isIntersecting) {
-                navbar.classList.add('visible'); 
+        // Appliquer un délai d'une seconde avant d'afficher la navbar
+        setTimeout(() => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop < logoSection.offsetHeight) {
+                navbar.style.transform = 'translateY(0)';
+            }
+
+            window.addEventListener('scroll', () => {
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (scrollTop < logoSection.offsetHeight) {
+                    navbar.style.transform = 'translateY(0)';
                 } else {
-                navbar.classList.remove('visible');
+                    navbar.style.transform = 'translateY(-100%)';
                 }
             });
-
-            observer.observe(document.querySelector('.logo')); 
-        });
+        }, 1000); // 1000 millisecondes = 1 seconde
+    });
 
         document.getElementById("newsletter-form").addEventListener("submit", function(event) {
             event.preventDefault();  
@@ -135,11 +219,19 @@
             sendDataToGoogleSheet(name, email, "newsletter")
                 .then(() => {
                     console.log("Newsletter subscription successful!");
+                    showResponsePopup("Newsletter subscription successful!")
                 })
                 .catch(error => {
                     console.error("Error submitting form:", error);
                 });
         });
+//         async function sendDataToGoogleSheet(name, email, formType) {
+//     // ... (votre code pour envoyer les données à Google Sheets)
+
+//     // Afficher le popup de confirmation après l'envoi des données
+//     showResponsePopup("Newsletter subscription successful!"); 
+// }
+
     </script>
 </body>
 </html>
