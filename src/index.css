@@ -103,14 +103,18 @@
     @apply font-favorit-light text-center mx-auto;
     font-size: var(--font-size-2xl);
     margin-bottom: 1.25rem;
-    max-width: 90%;
+    max-width: 95%;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   
   .section-subtitle {
     @apply font-favorit-light text-center mx-auto;
     font-size: var(--font-size-base);
-    max-width: 90%;
+    max-width: 95%;
     margin: 1.25rem auto;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   
   /* Navigation */
