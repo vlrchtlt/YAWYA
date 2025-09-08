@@ -2,96 +2,199 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* YAWYA Design System - Luxury Fashion Tech */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
+    /* YAWYA Brand Colors */
+    --yawya-red: 351 100% 53%;          /* #EE002D */
+    --yawya-black: 0 0% 0%;             /* #000000 */
+    --yawya-white: 0 0% 100%;           /* #FFFFFF */
+    
+    /* Semantic Tokens */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --foreground: 0 0% 0%;
+    --primary: 351 100% 53%;            /* YAWYA Red */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 0%;               /* YAWYA Black */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 351 100% 53%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Layout */
+    --radius: 0rem;                     /* Sharp corners for luxury feel */
+    
+    /* Typography Scale */
+    --font-size-xs: 0.75rem;           /* 12px */
+    --font-size-sm: 1rem;              /* 16px */
+    --font-size-base: 1.1rem;          /* 18px */
+    --font-size-lg: 1.2rem;            /* 20px */
+    --font-size-xl: 2rem;              /* 32px */
+    --font-size-2xl: 3rem;             /* 48px */
+    --font-size-3xl: 4rem;             /* 64px */
+    
+    /* Animations */
+    --transition-smooth: all 0.3s ease;
+    --transition-slow: all 0.6s ease;
   }
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@layer base {
+  * {
+    @apply border-border;
   }
+  
+  body {
+    @apply bg-background text-foreground font-favorit;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-favorit-light;
+  }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-section {
+    @apply min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center bg-no-repeat;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+  }
+  
+  .hero-title {
+    @apply font-favorit-light text-white;
+    font-size: var(--font-size-3xl);
+    line-height: 1.1;
+    max-width: 75%;
+  }
+  
+  .hero-subtitle {
+    @apply font-favorit-light text-white;
+    font-size: var(--font-size-lg);
+    max-width: 75%;
+    margin: 1.25rem 0 2.5rem;
+  }
+  
+  /* Logo Section */
+  .logo-section {
+    @apply min-h-screen flex flex-col justify-center items-center;
+    background-color: hsl(var(--primary));
+  }
+  
+  /* Vision Section */
+  .vision-section {
+    @apply min-h-screen flex flex-col justify-center items-center text-center;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--primary));
+  }
+  
+  /* Section Titles */
+  .section-title {
+    @apply font-favorit-light;
+    font-size: var(--font-size-2xl);
+    margin-bottom: 1.25rem;
+    max-width: 75%;
+  }
+  
+  .section-subtitle {
+    @apply font-favorit-light;
+    font-size: var(--font-size-base);
+    max-width: 75%;
+    margin: 1.25rem auto;
+  }
+  
+  /* Navigation */
+  .navbar {
+    @apply fixed top-0 w-full z-50 flex justify-between items-center bg-transparent;
+    padding: 10px 20px;
+    transition: var(--transition-smooth);
+  }
+  
+  .navbar-right {
+    @apply flex items-center;
+    animation: apparition 4s forwards;
+  }
+  
+  .navbar-link {
+    @apply text-black bg-transparent no-underline;
+    padding: 20px 10px;
+    margin-right: 10px;
+    font-size: var(--font-size-xs);
+    transition: var(--transition-smooth);
+  }
+  
+  .navbar-link:hover {
+    @apply text-white;
+  }
+  
+  /* Language Toggle */
+  .language-toggle {
+    @apply flex gap-1;
+  }
+  
+  .language-button {
+    @apply px-2 py-1 text-xs cursor-pointer transition-colors duration-300;
+  }
+  
+  .language-button.active {
+    color: hsl(var(--primary));
+  }
+  
+  .language-button:hover {
+    color: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  /* Smooth scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Appear animation */
+  @keyframes apparition {
+    0% { opacity: 0; }
+    25% { opacity: 0; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+  }
+  
+  .animate-appear {
+    animation: apparition 4s forwards;
+  }
+  
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+  
+  /* Stagger animation delays */
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
 }
 
 @layer base {

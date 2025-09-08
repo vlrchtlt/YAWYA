@@ -39,24 +39,25 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+        // YAWYA Brand Colors
+        yawya: {
+          red: "hsl(var(--yawya-red))",
+          black: "hsl(var(--yawya-black))",
+          white: "hsl(var(--yawya-white))",
         },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
+      },
+      fontFamily: {
+        'favorit': ['Inter', 'sans-serif'],
+        'favorit-light': ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        'xs': 'var(--font-size-xs)',
+        'sm': 'var(--font-size-sm)',
+        'base': 'var(--font-size-base)',
+        'lg': 'var(--font-size-lg)',
+        'xl': 'var(--font-size-xl)',
+        '2xl': 'var(--font-size-2xl)',
+        '3xl': 'var(--font-size-3xl)',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +81,38 @@ export default {
             height: "0",
           },
         },
+        "apparition": {
+          "0%": { opacity: "0" },
+          "25%": { opacity: "0" },
+          "50%": { opacity: "0.2" },
+          "100%": { opacity: "1" },
+        },
+        "fade-in": {
+          from: {
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "apparition": "apparition 4s forwards",
+        "fade-in": "fade-in 0.8s ease-out forwards",
+      },
+      transitionProperty: {
+        'smooth': 'all',
+      },
+      transitionDuration: {
+        'smooth': '300ms',
+        'slow': '600ms',
+      },
+      transitionTimingFunction: {
+        'smooth': 'ease',
       },
     },
   },
