@@ -31,7 +31,7 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ title, steps }) =
                   0{index + 1}
                 </span>
               </div>
-              <p className="section-subtitle text-left">{step.text}</p>
+              <p className="section-subtitle text-center">{step.text}</p>
             </div>
           ))}
         </div>

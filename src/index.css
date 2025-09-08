@@ -72,17 +72,17 @@
   }
   
   .hero-title {
-    @apply font-favorit-light text-white;
+    @apply font-favorit-light text-white text-center mx-auto;
     font-size: var(--font-size-3xl);
     line-height: 1.1;
-    max-width: 75%;
+    max-width: 90%;
   }
   
   .hero-subtitle {
-    @apply font-favorit-light text-white;
+    @apply font-favorit-light text-white text-center mx-auto;
     font-size: var(--font-size-lg);
-    max-width: 75%;
-    margin: 1.25rem 0 2.5rem;
+    max-width: 90%;
+    margin: 1.25rem auto 2.5rem;
   }
   
   /* Logo Section */
@@ -100,16 +100,16 @@
   
   /* Section Titles */
   .section-title {
-    @apply font-favorit-light;
+    @apply font-favorit-light text-center mx-auto;
     font-size: var(--font-size-2xl);
     margin-bottom: 1.25rem;
-    max-width: 75%;
+    max-width: 90%;
   }
   
   .section-subtitle {
-    @apply font-favorit-light;
+    @apply font-favorit-light text-center mx-auto;
     font-size: var(--font-size-base);
-    max-width: 75%;
+    max-width: 90%;
     margin: 1.25rem auto;
   }
   
