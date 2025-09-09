@@ -71,3 +71,21 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Static HTML/CSS version
+
+A static version of the landing page is available in `static/`.
+
+- Open `static/index.html` directly in a browser, or deploy the `static/` folder to any static host.
+- Assets:
+  - `static/yawya-logo.svg` is included.
+  - Copy `src/assets/yawya-hero.jpg` to `static/assets/yawya-hero.jpg` to enable the hero background image.
+- Styling uses Tailwind CDN plus `static/styles.css` to mirror custom classes.
+
+### Default language and language switcher
+
+- Default static entry is English: open `static/index.html`.
+- Other languages: `static/index.fr.html` (French), `static/index.it.html` (Italian).
+- Each static page includes a simple language switcher in the top navbar linking to the other language files (English points to `index.html`).
+
+Open directly in a browser or deploy the `static/` folder.

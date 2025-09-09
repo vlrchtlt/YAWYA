@@ -1,0 +1,29 @@
+/* YAWYA static styles (extracted) */
+@font-face { font-family: 'Favorit-regular'; src: url('./fonts/Favorit-Regular.woff2') format('woff2'), url('./fonts/Favorit-Regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Favorit-light'; src: url('./fonts/Favorit-Light.woff2') format('woff2'), url('./fonts/Favorit-Light.woff') format('woff'); font-weight: 300; font-style: normal; font-display: swap; }
+:root {
+  --yawya-red: #ee002d;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --primary: 351 100% 53%;
+  --secondary: 0 0% 0%;
+  --accent: 0 0% 95%;
+  --border: 0 0% 89%;
+  --font-size-base: 1.1rem;
+  --font-size-2xl: 3rem;
+  --font-size-3xl: 4rem;
+}
+body { font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+.smooth-scroll { scroll-behavior: smooth; }
+.navbar { position: fixed; top: 0; width: 100%; z-index: 50; display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 10px 20px; transition: all .3s ease; }
+.hero-section { min-height: 100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background-size: cover; background-position: center; background-repeat:no-repeat; }
+.hero-title { color: #fff; font-weight: 400; font-size: var(--font-size-3xl); line-height: 1.1; max-width: 90%; margin-left:auto; margin-right:auto; text-transform: uppercase; font-family: Favorit-regular; }
+.hero-subtitle { color: #000; font-weight: 300; font-size: 1.2rem; max-width: 90%; margin: 1.25rem auto 2.5rem; font-family: Favorit-light; }
+.vision-section { min-height: 100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background: #000; color: hsl(var(--primary)); }
+.section-title { font-weight: 400; text-align:center; margin: 0 auto 1.25rem; max-width:95%; font-size: var(--font-size-2xl); word-wrap: break-word; hyphens: auto; text-transform: uppercase; font-family: Favorit-regular; }
+.section-subtitle { font-weight: 300; text-align:center; margin: 1.25rem auto; max-width:95%; font-size: var(--font-size-base); word-wrap: break-word; hyphens: auto; font-family: Favorit-light; }
+@keyframes fade-in { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+.animate-fade-in { animation: fade-in .8s ease-out forwards; }
+.animate-delay-200 { animation-delay: .2s; }
+.animate-delay-400 { animation-delay: .4s; }
+.animate-delay-600 { animation-delay: .6s; }
