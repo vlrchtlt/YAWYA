@@ -10,6 +10,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css" />
+    <script>
+      function sendPresentationRequest(lang) {
+        const messages = {
+          'en': {
+            subject: 'Private Presentation Request - YAWYA',
+            body: 'Hello,\n\nI am interested in scheduling a private presentation of YAWYA for my fashion house.\n\nPlease contact me to arrange a meeting.\n\nBest regards'
+          },
+          'fr': {
+            subject: 'Demande de Présentation Privée - YAWYA',
+            body: 'Bonjour,\n\nJe suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode.\n\nMerci de me contacter pour organiser un rendez-vous.\n\nCordialement'
+          },
+          'it': {
+            subject: 'Richiesta Presentazione Privata - YAWYA',
+            body: 'Salve,\n\nSono interessato/a a una presentazione privata di YAWYA per la mia maison di moda.\n\nVi prego di contattarmi per organizzare un incontro.\n\nCordiali saluti'
+          }
+        };
+        
+        const message = messages[lang];
+        const mailtoLink = `mailto:vlrchtlt@gmail.com?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;
+        window.location.href = mailtoLink;
+      }
+    </script>
   </head>
   <body class="bg-white text-black">
     <div class="smooth-scroll">
@@ -88,7 +110,7 @@
           <div class="max-w-4xl mx-auto">
             <h2 class="section-title animate-fade-in">FOR FASHION MAISONS</h2>
             <p class="section-subtitle mt-8 animate-fade-in animate-delay-200">Create new experiences, reduce returns, stand apart</p>
-            <a href="#contact" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400">Schedule Your Private Presentation</a>
+              <button onclick="sendPresentationRequest('en')" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer">Schedule Your Private Presentation</button>
           </div>
         </section>
 
