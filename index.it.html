@@ -198,9 +198,12 @@
     <div id="contactModal" class="modal">
       <div class="modal-content">
         <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; font-weight: 300;">Contattaci</h3>
-        <form id="contactForm" name="contact-it" method="POST" data-netlify="true" action="/success.html">
+        <form id="contactForm" name="contact-it" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
           <input type="hidden" name="form-name" value="contact-it" />
           <input type="hidden" name="subject" value="Richiesta Presentazione Privata - YAWYA" />
+          <div style="display: none;">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </div>
           <div class="form-field">
             <label for="contactName">Nome</label>
             <input type="text" name="name" id="contactName" required>
