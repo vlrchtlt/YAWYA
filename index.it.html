@@ -10,26 +10,94 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
+      .modal-content { background: white; margin: 5% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 0; }
+      .form-field { margin-bottom: 20px; }
+      .form-field label { display: block; margin-bottom: 8px; font-weight: 300; text-transform: uppercase; }
+      .form-field input, .form-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; font-family: Favorit, Inter, sans-serif; text-transform: none; }
+      .form-field textarea { height: 100px; resize: vertical; }
+      .form-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
+      .btn-submit { background: #ee002d; color: white; padding: 12px 24px; border: 0; cursor: pointer; text-transform: uppercase; }
+      .btn-cancel { background: #ccc; color: black; padding: 12px 24px; border: 0; cursor: pointer; text-transform: uppercase; }
+      .btn-submit:hover { background: #ee002d; }
+      .btn-cancel:hover { background: #aaa; }
+    </style>
+    <script>
+      function showContactForm() {
+        document.getElementById('contactModal').style.display = 'flex';
+      }
+      
+      function closeContactForm() {
+        document.getElementById('contactModal').style.display = 'none';
+        document.getElementById('contactForm').reset();
+      }
+      
+      function submitContactForm() {
+        // For local testing, use mailto; on Netlify, form will submit normally
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          const name = document.getElementById('contactName').value.trim();
+          const email = document.getElementById('contactEmail').value.trim();
+          const message = document.getElementById('contactMessage').value.trim();
+          
+          if (!name || !email || !message) {
+            alert('Compilare tutti i campi');
+            return;
+          }
+          
+          const subject = 'Richiesta Presentazione Privata - YAWYA';
+          const emailBody = `Nome: ${name}\nEmail: ${email}\n\nMessaggio:\n${message}`;
+          const mailtoLink = `mailto:vlrchtlt@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+          window.location.href = mailtoLink;
+          closeContactForm();
+        } else {
+          // On Netlify, submit the form normally
+          document.getElementById('contactForm').submit();
+        }
+      }
+    </script>
     <script>
       function sendPresentationRequest(lang) {
+        console.log('Button clicked for language:', lang);
+        
         const messages = {
           'en': {
             subject: 'Private Presentation Request - YAWYA',
-            body: 'Hello,\n\nI am interested in scheduling a private presentation of YAWYA for my fashion house.\n\nPlease contact me to arrange a meeting.\n\nBest regards'
+            body: 'Hello,\n\nI am interested in scheduling a private presentation of YAWYA for my fashion house.\n\nPlease contact me to arrange a meeting.\n\nBest regards',
+            alertText: 'Please send us an email with your contact details:\n\nTo: vlrchtlt@gmail.com\nSubject: Private Presentation Request - YAWYA\n\nMessage: Hello, I am interested in scheduling a private presentation of YAWYA for my fashion house. Please contact me to arrange a meeting.'
           },
           'fr': {
             subject: 'Demande de Présentation Privée - YAWYA',
-            body: 'Bonjour,\n\nJe suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode.\n\nMerci de me contacter pour organiser un rendez-vous.\n\nCordialement'
+            body: 'Bonjour,\n\nJe suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode.\n\nMerci de me contacter pour organiser un rendez-vous.\n\nCordialement',
+            alertText: 'Merci de nous envoyer un email avec vos coordonnées:\n\nÀ: vlrchtlt@gmail.com\nObjet: Demande de Présentation Privée - YAWYA\n\nMessage: Bonjour, je suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode. Merci de me contacter pour organiser un rendez-vous.'
           },
           'it': {
             subject: 'Richiesta Presentazione Privata - YAWYA',
-            body: 'Salve,\n\nSono interessato/a a una presentazione privata di YAWYA per la mia maison di moda.\n\nVi prego di contattarmi per organizzare un incontro.\n\nCordiali saluti'
+            body: 'Salve,\n\nSono interessato/a a una presentazione privata di YAWYA per la mia maison di moda.\n\nVi prego di contattarmi per organizzare un incontro.\n\nCordiali saluti',
+            alertText: 'Vi preghiamo di inviarci una email con i vostri dati di contatto:\n\nA: vlrchtlt@gmail.com\nOggetto: Richiesta Presentazione Privata - YAWYA\n\nMessaggio: Salve, sono interessato/a a una presentazione privata di YAWYA per la mia maison di moda. Vi prego di contattarmi per organizzare un incontro.'
           }
         };
         
-        const message = messages[lang];
-        const mailtoLink = `mailto:vlrchtlt@gmail.com?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;
-        window.location.href = mailtoLink;
+        const message = messages[lang] || messages['en'];
+        const mailtoLink = 'mailto:vlrchtlt@gmail.com?subject=' + encodeURIComponent(message.subject) + '&body=' + encodeURIComponent(message.body);
+        
+        // Try to open email client
+        const emailOpened = window.open(mailtoLink, '_self');
+        
+        // If email client doesn't open, show instructions
+        setTimeout(() => {
+          if (confirm(message.alertText + '\n\nClick OK to copy the email address to clipboard.')) {
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText('vlrchtlt@gmail.com').then(() => {
+                alert('Email address copied to clipboard!');
+              }).catch(() => {
+                alert('Email address: vlrchtlt@gmail.com');
+              });
+            } else {
+              alert('Email address: vlrchtlt@gmail.com');
+            }
+          }
+        }, 1000);
       }
     </script>
   </head>
@@ -110,7 +178,7 @@
           <div class="max-w-4xl mx-auto">
             <h2 class="section-title animate-fade-in">Per le Maisons di Moda</h2>
             <p class="section-subtitle mt-8 animate-fade-in animate-delay-200">Crea nuove esperienze, riduci i resi, rafforzare la tua unicità</p>
-              <button onclick="sendPresentationRequest('it')" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer">Programma la Tua Presentazione Privata</button>
+              <button onclick="showContactForm()" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer hover:bg-gray-800 transition-colors">Programma la Tua Presentazione Privata</button>
           </div>
         </section>
 
@@ -124,6 +192,33 @@
           </div>
         </div>
       </footer>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; font-weight: 300;">Contattaci</h3>
+        <form id="contactForm" name="contact-it" method="POST" netlify>
+          <input type="hidden" name="form-name" value="contact-it" />
+          <input type="hidden" name="subject" value="Richiesta Presentazione Privata - YAWYA" />
+          <div class="form-field">
+            <label for="contactName">Nome</label>
+            <input type="text" name="name" id="contactName" required>
+          </div>
+          <div class="form-field">
+            <label for="contactEmail">Email</label>
+            <input type="email" name="email" id="contactEmail" required>
+          </div>
+          <div class="form-field">
+            <label for="contactMessage">Messaggio</label>
+            <textarea name="message" id="contactMessage" placeholder="Raccontateci della vostra maison di moda e del vostro interesse per YAWYA..." required></textarea>
+          </div>
+          <div class="form-buttons">
+            <button type="submit" class="btn-submit">Invia</button>
+            <button type="button" onclick="closeContactForm()" class="btn-cancel">Annulla</button>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
