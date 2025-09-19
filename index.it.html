@@ -55,6 +55,39 @@
           document.getElementById('contactForm').submit();
         }
       }
+      
+      // Force video play on mobile after user interaction
+      function enableVideoAutoplay() {
+        const video = document.querySelector('.hero-video');
+        if (video) {
+          video.muted = true;
+          video.play().catch(e => {
+            console.log('Video autoplay failed:', e);
+            // Add play button overlay if autoplay fails
+            addPlayButton(video);
+          });
+        }
+      }
+      
+      function addPlayButton(video) {
+        const playButton = document.createElement('div');
+        playButton.innerHTML = '▶';
+        playButton.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:4rem;color:white;cursor:pointer;z-index:10;background:rgba(0,0,0,0.5);border-radius:50%;width:80px;height:80px;display:flex;align-items:center;justify-content:center;';
+        
+        playButton.onclick = () => {
+          video.play();
+          playButton.remove();
+        };
+        
+        video.parentElement.appendChild(playButton);
+      }
+      
+      // Try to enable video on any user interaction
+      document.addEventListener('touchstart', enableVideoAutoplay, { once: true });
+      document.addEventListener('click', enableVideoAutoplay, { once: true });
+      
+      // Also try when page loads
+      window.addEventListener('load', enableVideoAutoplay);
     </script>
     <script>
       function sendPresentationRequest(lang) {
