@@ -10,8 +10,8 @@
   --accent: 0 0% 95%;
   --border: 0 0% 89%;
   --font-size-base: 1.1rem;
-  --font-size-2xl: 3rem;
-  --font-size-3xl: 4rem;
+  --font-size-2xl: 1.1rem;
+  --font-size-3xl: 1.1rem;
 }
 body { margin: 0; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; text-transform: uppercase; }
 .smooth-scroll { scroll-behavior: smooth; }
@@ -24,11 +24,12 @@ body { margin: 0; font-family: Favorit, Inter, system-ui, -apple-system, Segoe U
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 0; }
 .hero-content { position: relative; z-index: 1; }
 .hero-title { color: #fff; font-weight: 400; font-size: var(--font-size-3xl); line-height: 1.1; max-width: 90%; margin-left:auto; margin-right:auto; text-transform: uppercase; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
-.hero-subtitle { color: #000; font-weight: 300; font-size: 1.2rem; max-width: 90%; margin: 1.25rem auto 2.5rem; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+.hero-subtitle { color: #000; font-weight: 300; font-size: 1.1rem; max-width: 90%; margin: 1.25rem auto 2.5rem; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
 .vision-section { min-height: 100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background: #000; color: hsl(var(--primary)); }
 .section-title { font-weight: 400; text-align:center; margin: 0 auto 1.25rem; max-width:95%; font-size: var(--font-size-2xl); word-wrap: break-word; hyphens: auto; text-transform: uppercase; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
 .section-subtitle { font-weight: 300; text-align:center; margin: 1.25rem auto; max-width:95%; font-size: var(--font-size-base); word-wrap: break-word; hyphens: auto; font-family: Favorit, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
 .hero-logo { display:block; width:90%; margin:0 auto; line-height:0; padding:0; }
+.text-uniform { font-size: 1.1rem !important; }
 @keyframes fade-in { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
 .animate-fade-in { animation: fade-in .8s ease-out forwards; }
 .animate-delay-200 { animation-delay: .2s; }
