@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,12 +41,12 @@
           const message = document.getElementById('contactMessage').value.trim();
           
           if (!name || !email || !message) {
-            alert('Compilare tutti i campi');
+            alert('Please fill all fields');
             return;
           }
           
-          const subject = 'Richiesta Presentazione Privata - YAWYA';
-          const emailBody = `Nome: ${name}\nEmail: ${email}\n\nMessaggio:\n${message}`;
+          const subject = 'Private Presentation Request - YAWYA';
+          const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
           const mailtoLink = `mailto:vlrchtlt@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
           window.location.href = mailtoLink;
           closeContactForm();
@@ -89,50 +89,6 @@
       // Also try when page loads
       window.addEventListener('load', enableVideoAutoplay);
     </script>
-    <script>
-      function sendPresentationRequest(lang) {
-        console.log('Button clicked for language:', lang);
-        
-        const messages = {
-          'en': {
-            subject: 'Private Presentation Request - YAWYA',
-            body: 'Hello,\n\nI am interested in scheduling a private presentation of YAWYA for my fashion house.\n\nPlease contact me to arrange a meeting.\n\nBest regards',
-            alertText: 'Please send us an email with your contact details:\n\nTo: vlrchtlt@gmail.com\nSubject: Private Presentation Request - YAWYA\n\nMessage: Hello, I am interested in scheduling a private presentation of YAWYA for my fashion house. Please contact me to arrange a meeting.'
-          },
-          'fr': {
-            subject: 'Demande de Présentation Privée - YAWYA',
-            body: 'Bonjour,\n\nJe suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode.\n\nMerci de me contacter pour organiser un rendez-vous.\n\nCordialement',
-            alertText: 'Merci de nous envoyer un email avec vos coordonnées:\n\nÀ: vlrchtlt@gmail.com\nObjet: Demande de Présentation Privée - YAWYA\n\nMessage: Bonjour, je suis intéressé(e) par une présentation privée de YAWYA pour ma maison de mode. Merci de me contacter pour organiser un rendez-vous.'
-          },
-          'it': {
-            subject: 'Richiesta Presentazione Privata - YAWYA',
-            body: 'Salve,\n\nSono interessato/a a una presentazione privata di YAWYA per la mia maison di moda.\n\nVi prego di contattarmi per organizzare un incontro.\n\nCordiali saluti',
-            alertText: 'Vi preghiamo di inviarci una email con i vostri dati di contatto:\n\nA: vlrchtlt@gmail.com\nOggetto: Richiesta Presentazione Privata - YAWYA\n\nMessaggio: Salve, sono interessato/a a una presentazione privata di YAWYA per la mia maison di moda. Vi prego di contattarmi per organizzare un incontro.'
-          }
-        };
-        
-        const message = messages[lang] || messages['en'];
-        const mailtoLink = 'mailto:vlrchtlt@gmail.com?subject=' + encodeURIComponent(message.subject) + '&body=' + encodeURIComponent(message.body);
-        
-        // Try to open email client
-        const emailOpened = window.open(mailtoLink, '_self');
-        
-        // If email client doesn't open, show instructions
-        setTimeout(() => {
-          if (confirm(message.alertText + '\n\nClick OK to copy the email address to clipboard.')) {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText('vlrchtlt@gmail.com').then(() => {
-                alert('Email address copied to clipboard!');
-              }).catch(() => {
-                alert('Email address: vlrchtlt@gmail.com');
-              });
-            } else {
-              alert('Email address: vlrchtlt@gmail.com');
-            }
-          }
-        }, 1000);
-      }
-    </script>
   </head>
   <body class="bg-white text-black">
     <div class="smooth-scroll">
@@ -141,24 +97,24 @@
           <img src="./yawya-logo.svg" alt="YAWYA" class="h-5" />
         </div>
         <div class="navbar-right text-xs flex gap-3">
-          <a href="./index.html" class="hover:text-[hsl(351,100%,53%)]">EN</a>
+          <span class="text-[hsl(351,100%,53%)]">EN</span>
           <a href="./index.fr.html" class="hover:text-[hsl(351,100%,53%)]">FR</a>
-          <span class="text-[hsl(351,100%,53%)]">IT</span>
+          <a href="./index.it.html" class="hover:text-[hsl(351,100%,53%)]">IT</a>
         </div>
       </nav>
 
       <main>
         <section class="hero-section">
           <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-            <source src="./videos/video landing YAWYA_IT_2.mp4" type="video/mp4">
+            <source src="./videos/video landing YAWYA_EN_2.mp4" type="video/mp4">
           </video>
         </section>
 
         <section class="min-h-screen flex flex-col justify-center items-center bg-white text-center px-6 py-20">
           <div class="max-w-4xl mx-auto">
             <div class="space-y-4">
-              <p class="text-black font-light text-uniform">YAWYA celebra l'unico</p>
-              <p class="text-black font-light text-uniform">La bellezza non ha norma</p>
+              <p class="text-black font-light text-uniform">YAWYA celebrates the unique</p>
+              <p class="text-black font-light text-uniform">Beauty has no mold</p>
             </div>
           </div>
         </section>
@@ -167,13 +123,13 @@
           <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-200">
-                <p class="section-subtitle text-white">Un'esperienza coinvolgente — dai vita alla prova IA in boutique</p>
+                <p class="section-subtitle text-white">An engaging boutique moment — bring AI fitting to life in-store</p>
               </div>
               <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-400">
-                <p class="section-subtitle text-white">Intelligente incontra sensoriale — vediti istantaneamente con tutta la collezione</p>
+                <p class="section-subtitle text-white">Digital meets sensorial — customers see themselves in the garment, instantly</p>
               </div>
               <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-600">
-                <p class="section-subtitle text-white">Progettato per il domani — uno sguardo al futuro, radicato nella tecnologia all'avanguardia</p>
+                <p class="section-subtitle text-white">Tailored for tomorrow — a hint at what's next</p>
               </div>
             </div>
           </div>
@@ -181,19 +137,19 @@
 
         <section class="min-h-screen flex flex-col justify-center items-center bg-accent text-center px-6 py-20">
           <div class="max-w-4xl mx-auto">
-            <h2 class="section-title animate-fade-in">Come Funziona</h2>
+            <h2 class="section-title animate-fade-in">How It Works</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
               <div class="animate-fade-in animate-delay-200">
                 <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">01</span></div>
-                <p class="section-subtitle text-center">Cattura — ripresa discreta, progettata per le boutique</p>
+                <p class="section-subtitle text-center">Capture — discreet scanning, shaped for in-store settings</p>
               </div>
               <div class="animate-fade-in animate-delay-400">
                 <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">02</span></div>
-                <p class="section-subtitle text-center">Rendering — la nostra IA proprietaria presenta la collezione sulla silhouette dei clienti</p>
+                <p class="section-subtitle text-center">Render — our proprietary AI brings garments to life on your customers' silhouette</p>
               </div>
               <div class="animate-fade-in animate-delay-600">
                 <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">03</span></div>
-                <p class="section-subtitle text-center">Visualizza — rappresentazione fotorealistica, istantanea e intuitiva</p>
+                <p class="section-subtitle text-center">See — photorealistic representation, instantly visible and intuitive</p>
               </div>
             </div>
           </div>
@@ -201,15 +157,15 @@
 
         <section class="vision-section px-6 py-20">
           <div class="max-w-4xl mx-auto">
-            <p class="section-title animate-fade-in">Ogni prova YAWYA è un passo verso un mondo dove la moda è su misura, unica come la persona che la indossa</p>
+            <p class="section-title animate-fade-in">Every YAWYA fitting is a step towards a world where fashion is as unique as the person wearing it</p>
           </div>
         </section>
 
         <section class="min-h-screen flex flex-col justify-center items-center bg-background text-center px-6 py-20">
           <div class="max-w-4xl mx-auto">
-            <h2 class="section-title animate-fade-in">Per le Maisons di Moda</h2>
-            <p class="section-subtitle mt-8 animate-fade-in animate-delay-200">Crea nuove esperienze, riduci i resi, rafforzare la tua unicità</p>
-              <button onclick="showContactForm()" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer hover:bg-gray-800 transition-colors">Programma la Tua Presentazione Privata</button>
+            <h2 class="section-title animate-fade-in">FOR FASHION MAISONS</h2>
+            <p class="section-subtitle mt-8 animate-fade-in animate-delay-200">Create new experiences, reduce returns, stand apart</p>
+              <button onclick="showContactForm()" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer hover:bg-gray-800 transition-colors">Schedule Your Private Presentation</button>
           </div>
         </section>
 
@@ -219,7 +175,7 @@
         <div class="max-w-6xl mx-auto text-center">
           <a id="contact" href="mailto:contact@yawyastudio.com" class="hover:text-[hsl(351,100%,53%)] transition-colors">contact@yawyastudio.com</a>
           <div class="mt-8 pt-8 border-t border-white/20">
-            <p class="text-white/70">© 2025 YAWYA. Tutti i diritti riservati.</p>
+            <p class="text-white/70">© 2025 YAWYA. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -228,15 +184,15 @@
     <!-- Contact Modal -->
     <div id="contactModal" class="modal">
       <div class="modal-content">
-        <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; font-weight: 300;">Contattaci</h3>
-        <form id="contactForm" name="contact-it" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
-          <input type="hidden" name="form-name" value="contact-it" />
-          <input type="hidden" name="subject" value="Richiesta Presentazione Privata - YAWYA" />
+        <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; font-weight: 300;">Contact Us</h3>
+        <form id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="subject" value="Private Presentation Request - YAWYA" />
           <div style="display: none;">
             <label>Don't fill this out: <input name="bot-field" /></label>
           </div>
           <div class="form-field">
-            <label for="contactName">Nome</label>
+            <label for="contactName">Name</label>
             <input type="text" name="name" id="contactName" required>
           </div>
           <div class="form-field">
@@ -244,12 +200,12 @@
             <input type="email" name="email" id="contactEmail" required>
           </div>
           <div class="form-field">
-            <label for="contactMessage">Messaggio</label>
-            <textarea name="message" id="contactMessage" placeholder="Raccontateci della vostra maison di moda e del vostro interesse per YAWYA..." required></textarea>
+            <label for="contactMessage">Message</label>
+            <textarea name="message" id="contactMessage" placeholder="Tell us about your fashion house and your interest in YAWYA..." required></textarea>
           </div>
           <div class="form-buttons">
-            <button type="submit" class="btn-submit">Invia</button>
-            <button type="button" onclick="closeContactForm()" class="btn-cancel">Annulla</button>
+            <button type="submit" class="btn-submit">Send</button>
+            <button type="button" onclick="closeContactForm()" class="btn-cancel">Cancel</button>
           </div>
         </form>
       </div>

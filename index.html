@@ -1,214 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAWYA</title>
-    <link rel="icon" href="./yawya-logo.svg" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css" />
     <style>
-      .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
-      .modal-content { background: white; margin: 5% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 0; }
-      .form-field { margin-bottom: 20px; }
-      .form-field label { display: block; margin-bottom: 8px; font-weight: 300; text-transform: uppercase; }
-      .form-field input, .form-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; font-family: Favorit, Inter, sans-serif; text-transform: none; }
-      .form-field textarea { height: 100px; resize: vertical; }
-      .form-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
-      .btn-submit { background: #ee002d; color: white; padding: 12px 24px; border: 0; cursor: pointer; text-transform: uppercase; }
-      .btn-cancel { background: #ccc; color: black; padding: 12px 24px; border: 0; cursor: pointer; text-transform: uppercase; }
-      .btn-submit:hover { background: #ee002d; }
-      .btn-cancel:hover { background: #aaa; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Favorit, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-container {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-container img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .email {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .email:hover {
+            color: #999;
+        }
     </style>
-    <script>
-      function showContactForm() {
-        document.getElementById('contactModal').style.display = 'flex';
-      }
-      
-      function closeContactForm() {
-        document.getElementById('contactModal').style.display = 'none';
-        document.getElementById('contactForm').reset();
-      }
-      
-      function submitContactForm() {
-        // For local testing, use mailto; on Netlify, form will submit normally
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          const name = document.getElementById('contactName').value.trim();
-          const email = document.getElementById('contactEmail').value.trim();
-          const message = document.getElementById('contactMessage').value.trim();
-          
-          if (!name || !email || !message) {
-            alert('Please fill all fields');
-            return;
-          }
-          
-          const subject = 'Private Presentation Request - YAWYA';
-          const emailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-          const mailtoLink = `mailto:vlrchtlt@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-          window.location.href = mailtoLink;
-          closeContactForm();
-        } else {
-          // On Netlify, submit the form normally
-          document.getElementById('contactForm').submit();
-        }
-      }
-      
-      // Force video play on mobile after user interaction
-      function enableVideoAutoplay() {
-        const video = document.querySelector('.hero-video');
-        if (video) {
-          video.muted = true;
-          video.play().catch(e => {
-            console.log('Video autoplay failed:', e);
-            // Add play button overlay if autoplay fails
-            addPlayButton(video);
-          });
-        }
-      }
-      
-      function addPlayButton(video) {
-        const playButton = document.createElement('div');
-        playButton.innerHTML = '▶';
-        playButton.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:4rem;color:white;cursor:pointer;z-index:10;background:rgba(0,0,0,0.5);border-radius:50%;width:80px;height:80px;display:flex;align-items:center;justify-content:center;';
-        
-        playButton.onclick = () => {
-          video.play();
-          playButton.remove();
-        };
-        
-        video.parentElement.appendChild(playButton);
-      }
-      
-      // Try to enable video on any user interaction
-      document.addEventListener('touchstart', enableVideoAutoplay, { once: true });
-      document.addEventListener('click', enableVideoAutoplay, { once: true });
-      
-      // Also try when page loads
-      window.addEventListener('load', enableVideoAutoplay);
-    </script>
-  </head>
-  <body class="bg-white text-black">
-    <div class="smooth-scroll">
-      <nav class="navbar">
-        <div class="navbar-left">
-          <img src="./yawya-logo.svg" alt="YAWYA" class="h-5" />
-        </div>
-        <div class="navbar-right text-xs flex gap-3">
-          <span class="text-[hsl(351,100%,53%)]">EN</span>
-          <a href="./index.fr.html" class="hover:text-[hsl(351,100%,53%)]">FR</a>
-          <a href="./index.it.html" class="hover:text-[hsl(351,100%,53%)]">IT</a>
-        </div>
-      </nav>
-
-      <main>
-        <section class="hero-section">
-          <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-            <source src="./videos/video landing YAWYA_EN_2.mp4" type="video/mp4">
-          </video>
-        </section>
-
-        <section class="min-h-screen flex flex-col justify-center items-center bg-white text-center px-6 py-20">
-          <div class="max-w-4xl mx-auto">
-            <div class="space-y-4">
-              <p class="text-black font-light text-uniform">YAWYA celebrates the unique</p>
-              <p class="text-black font-light text-uniform">Beauty has no mold</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="min-h-screen flex flex-col justify-center items-center bg-black text-center px-6 py-20">
-          <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-200">
-                <p class="section-subtitle text-white">An engaging boutique moment — bring AI fitting to life in-store</p>
-              </div>
-              <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-400">
-                <p class="section-subtitle text-white">Digital meets sensorial — customers see themselves in the garment, instantly</p>
-              </div>
-              <div class="border border-white border-opacity-30 p-6 animate-fade-in animate-delay-600">
-                <p class="section-subtitle text-white">Tailored for tomorrow — a hint at what's next</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="min-h-screen flex flex-col justify-center items-center bg-accent text-center px-6 py-20">
-          <div class="max-w-4xl mx-auto">
-            <h2 class="section-title animate-fade-in">How It Works</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-              <div class="animate-fade-in animate-delay-200">
-                <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">01</span></div>
-                <p class="section-subtitle text-center">Capture — discreet scanning, shaped for in-store settings</p>
-              </div>
-              <div class="animate-fade-in animate-delay-400">
-                <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">02</span></div>
-                <p class="section-subtitle text-center">Render — our proprietary AI brings garments to life on your customers' silhouette</p>
-              </div>
-              <div class="animate-fade-in animate-delay-600">
-                <div class="mb-4"><span class="text-uniform font-light text-[hsl(351,100%,53%)]">03</span></div>
-                <p class="section-subtitle text-center">See — photorealistic representation, instantly visible and intuitive</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="vision-section px-6 py-20">
-          <div class="max-w-4xl mx-auto">
-            <p class="section-title animate-fade-in">Every YAWYA fitting is a step towards a world where fashion is as unique as the person wearing it</p>
-          </div>
-        </section>
-
-        <section class="min-h-screen flex flex-col justify-center items-center bg-background text-center px-6 py-20">
-          <div class="max-w-4xl mx-auto">
-            <h2 class="section-title animate-fade-in">FOR FASHION MAISONS</h2>
-            <p class="section-subtitle mt-8 animate-fade-in animate-delay-200">Create new experiences, reduce returns, stand apart</p>
-              <button onclick="showContactForm()" class="inline-block bg-black text-white px-6 py-3 mt-12 animate-fade-in animate-delay-400 border-0 cursor-pointer hover:bg-gray-800 transition-colors">Schedule Your Private Presentation</button>
-          </div>
-        </section>
-
-      </main>
-
-      <footer class="bg-black text-white py-12 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-          <a id="contact" href="mailto:contact@yawyastudio.com" class="hover:text-[hsl(351,100%,53%)] transition-colors">contact@yawyastudio.com</a>
-          <div class="mt-8 pt-8 border-t border-white/20">
-            <p class="text-white/70">© 2025 YAWYA. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="./assets/Logo_red.svg" alt="YAWYA">
     </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-      <div class="modal-content">
-        <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; font-weight: 300;">Contact Us</h3>
-        <form id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="subject" value="Private Presentation Request - YAWYA" />
-          <div style="display: none;">
-            <label>Don't fill this out: <input name="bot-field" /></label>
-          </div>
-          <div class="form-field">
-            <label for="contactName">Name</label>
-            <input type="text" name="name" id="contactName" required>
-          </div>
-          <div class="form-field">
-            <label for="contactEmail">Email</label>
-            <input type="email" name="email" id="contactEmail" required>
-          </div>
-          <div class="form-field">
-            <label for="contactMessage">Message</label>
-            <textarea name="message" id="contactMessage" placeholder="Tell us about your fashion house and your interest in YAWYA..." required></textarea>
-          </div>
-          <div class="form-buttons">
-            <button type="submit" class="btn-submit">Send</button>
-            <button type="button" onclick="closeContactForm()" class="btn-cancel">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>
+    
+    <a href="mailto:contact@yawyastudio.com" class="email">contact@yawyastudio.com</a>
+</body>
 </html>
